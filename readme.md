@@ -1,16 +1,19 @@
-# ☸️ Kubernetes 3-Tier Application Architecture
-
+# Kubernetes 3-Tier Application Architecture
 
 ### 📌 Project Overview
 
 This project demonstrates a **basic 3-tier application architecture on Kubernetes** using:
-- **Frontend:** Nginx (NodePort Service) with custom config
-- **Backend:** Node.js (ClusterIP Service)
-- **Database:** MySQL (StatefulSet with PVC, ConfigMap, Secret, Headless Service)
+- **Frontend:** Nginx with custom config, using NodePort Service
+- **Backend:** Node.js with ClusterIP Service
+- **Database:** MySQL using StatefulSet with PVC, ConfigMap, Secret & Headless Service
 
 **👉 No business logic is implemented intentionally.**
 The focus is purely on **Kubernetes concepts, networking, and service-to-service connectivity**.
 
+### 🧩 Logical View
+![diagram](./assets/images/architect-diagram.png)
+
+---
 
 ### 🎯 Purpose of This Project
 
@@ -38,11 +41,6 @@ The main goals of this project are:
 - Debugging connectivity issues step-by-step
 
 
-### 🏗️ Architecture Diagram (Logical View)
-
-![architect-diagram](./assets/images/architect-diagram.png)
-
-
 ### 🧩 Components Breakdown
 
 **1. Frontend**
@@ -67,7 +65,7 @@ The main goals of this project are:
   - Secret → DB passwords
 
 
-### Deployment Steps
+### 🚀 Deployment Steps
 
 **1. Create Namespace**
 ```sh
@@ -151,8 +149,6 @@ http://<NODE-IP>:30080
 # Verify locally
 curl http://<NODE-IP>:30080
 ```
-> - Nginx is configured as a reverse proxy using a ConfigMap.
-> - Requests to /api are forwarded to the backend ClusterIP service (backend-svc).
 
 ![frontend](./assets/images/frontend-verify.png)
 
@@ -176,15 +172,3 @@ curl http://<NODE-IP>:30080
 - No TLS between services
 - No Ingress controller
 - No autoscaling
-
-These are `intentional`, to keep focus on `core Kubernetes concepts`.
-
-
-### 💡 Future Improvements
-
-- Add real Node.js backend
-- Add readiness & liveness probes
-- Use Ingress instead of NodePort
-- Enable MySQL TLS
-- Add HPA (Horizontal Pod Autoscaler)
-- Add CI/CD pipeline
